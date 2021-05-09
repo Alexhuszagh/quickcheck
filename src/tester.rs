@@ -40,6 +40,10 @@ fn qc_gen_size() -> usize {
     }
 }
 
+fn qc_seed() -> Option<u64> {
+    env::var("QUICKCHECK_SEED").ok().and_then(|v| v.parse().ok())
+}
+
 fn qc_min_tests_passed() -> u64 {
     let default = 0;
     match env::var("QUICKCHECK_MIN_TESTS_PASSED") {
@@ -59,7 +63,13 @@ impl QuickCheck {
     /// number of overall tests is set to `10000` and the generator is created
     /// with a size of `100`.
     pub fn new() -> QuickCheck {
-        let gen = Gen::new(qc_gen_size());
+        let gen = if let Some(seed) = qc_seed() {
+            let mut g = Gen::from_seed(seed);
+            g.set_size(qc_gen_size());
+            g
+        } else {
+            Gen::new(qc_gen_size())
+        };
         let tests = qc_tests();
         let max_tests = cmp::max(tests, qc_max_tests());
         let min_tests_passed = qc_min_tests_passed();
