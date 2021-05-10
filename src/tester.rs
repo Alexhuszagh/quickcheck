@@ -41,7 +41,7 @@ fn qc_gen_size() -> usize {
 }
 
 fn qc_seed() -> Option<u64> {
-    env::var("QUICKCHECK_SEED").ok().and_then(|v| v.parse().ok())
+    env::var("QUICKCHECK_SEED").ok().and_then(|v| u64::from_str_radix(v.as_ref(), 16).ok())
 }
 
 fn qc_min_tests_passed() -> u64 {
