@@ -25,6 +25,6 @@ regex = ["env_logger/regex"]
 name = "quickcheck"
 
 [dependencies]
-env_logger = { version = "0.8.2", default-features = false, optional = true }
-log = { version = "0.4", optional = true }
-rand = { version = "0.8", default-features = false, features = ["getrandom", "small_rng"] }
+env_logger = { version = ">=0.11.5", default-features = false, optional = true }
+log = { version = ">=0.4.22", optional = true }
+rand = { version = ">=0.8.5", default-features = false, features = ["getrandom", "small_rng"] }
