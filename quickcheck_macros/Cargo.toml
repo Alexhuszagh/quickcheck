@@ -10,6 +10,7 @@ readme = "../README.md"
 keywords = ["testing", "quickcheck", "property", "shrinking", "fuzz"]
 license = "Unlicense/MIT"
 autotests = false
+edition = "2021"
 
 [lib]
 name = "quickcheck_macros"
