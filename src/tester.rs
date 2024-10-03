@@ -162,7 +162,7 @@ impl QuickCheck {
 
         let n_tests_passed = match self.quicktest(f) {
             Ok(n_tests_passed) => n_tests_passed,
-            Err(result) => panic!(result.failed_msg()),
+            Err(result) => panic!("{}", result.failed_msg()),
         };
 
         if n_tests_passed >= self.min_tests_passed {
@@ -411,10 +411,6 @@ where
         }
     })
 }
-
-/// Convenient aliases.
-trait AShow: Arbitrary + Debug {}
-impl<A: Arbitrary + Debug> AShow for A {}
 
 #[cfg(test)]
 mod test {
